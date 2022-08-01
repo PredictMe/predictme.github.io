@@ -1,0 +1,84 @@
+:root {
+    --background: #191B1F;
+    --button-primary: #0D6EFD;
+    --button-border: #15376C;
+}
+
+
+.overview-container{
+    background: var(--background);
+    width: 100%;
+    
+}
+
+
+.grid-01 {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+}
+
+.layer-01 {
+    position: absolute;
+    margin-left: 8vw;
+    left: 0px;
+    bottom: 7vh;
+    color: white;
+}
+
+.layer-01-text-01 {
+    font-size: 3.5rem;
+    font-family: 'inter', 'sans-serif';
+    font-weight: 600;
+}
+
+.layer-01-text-02 {
+    font-size: 1.2rem;
+    font-family: 'inter', 'sans-serif';
+    font-weight: 300;
+    display: block;
+    text-align: right;
+}
+
+.layer-02 {
+    position: absolute;
+    margin-right: 4vw;
+    right: 0px;
+    bottom: 20vh;
+    
+    
+}
+
+.layer-02-image{
+    width: 40vw;
+}
+
+.grid-21 {
+    background: var(--background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+}
+
+.description-01 {
+    
+    
+    margin-right: 5vw;
+    width: 25vw;
+}
+
+.infographic-01 {
+    margin-left: 5vw;
+    width: 30vw;
+}
+
+
+
+
+
+
+
+
+
+
