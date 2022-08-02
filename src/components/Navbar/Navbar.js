@@ -23,7 +23,6 @@ class Navbar extends Component{
         
     }
 
-    
 
     render(){
         window.addEventListener('scroll',this.onScroll)
@@ -41,7 +40,7 @@ class Navbar extends Component{
                     }
                     
                 </ul>
-                <AppButton>Launch App</AppButton>
+               <Link to='/Dapp'><AppButton>Launch App</AppButton></Link> 
             </nav>
         )
     }

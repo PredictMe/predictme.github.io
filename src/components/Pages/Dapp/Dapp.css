@@ -1,0 +1,16 @@
+
+.layout-01 {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.container-01{
+    background: var(--background);
+    width: 384px;
+    height: 216px;
+    border-radius: 18px;    
+}

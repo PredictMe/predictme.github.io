@@ -53,6 +53,20 @@
     width: 40vw;
 }
 
+.grid-51{
+    display: flex;
+    justify-content: right;
+}
+
+.all-decentralized {
+    font-size: 2.5rem;
+    font-family: 'inter', 'sans-serif';
+    font-weight: 600;
+    color: white;
+    margin-right: 8vw;
+    text-align: end;
+}
+
 .grid-21 {
     background: var(--background);
     display: flex;
@@ -62,8 +76,6 @@
 }
 
 .description-01 {
-    
-    
     margin-right: 5vw;
     width: 25vw;
 }
@@ -73,7 +85,38 @@
     width: 30vw;
 }
 
+.grid-31{
+    display: flex;
+    justify-content: left;
+}
 
+.monetize-ai {
+    font-size: 2.5rem;
+    font-family: 'inter', 'sans-serif';
+    font-weight: 600;
+    color: white;
+    margin-left: 8vw;
+}
+
+.grid-41 {
+    background: var(--background);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40vh;
+}
+
+
+.description-02 {
+    margin-left: 5vw;
+    width: 25vw;
+    
+}
+
+.infographic-02 {
+    margin-right: 5vw;
+    width: 30vw;
+}
 
 
 
