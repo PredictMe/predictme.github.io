@@ -4,6 +4,8 @@ import { AppButton } from './AppButton'
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Navbar.css'
+
+
 class Navbar extends Component{
 
     state = {clicked : false,
@@ -32,6 +34,7 @@ class Navbar extends Component{
                 <div    className='menu-icon' onClick={this.handleClick}>
                     <i  className={this.state.clicked ? 'lni lni-cross-circle' :'lni lni-menu'  }></i>
                 </div>
+                
                 <ul className={this.state.clicked ? "nav-menu active" : "nav-menu"}>
                     {
                         MenuItems.map((item,index)=>{

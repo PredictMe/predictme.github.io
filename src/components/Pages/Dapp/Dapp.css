@@ -1,16 +1,51 @@
+:root {
+    --background: #191B1F;
+    --button-primary: #0D6EFD;
+    --button-border: #15376C;
+}
 
 .layout-01 {
     width: 100vw;
     height: 100vh;
     display: flex;
+    background: var(--background);
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+.dapp-container {
+    background: grey;
+    display: flex;
+    padding: 20px 20px 20px 20px;
+    border-radius: 33px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
-.container-01{
+.chart-container{
     background: var(--background);
     width: 384px;
     height: 216px;
     border-radius: 18px;    
+}
+
+.button-dapp {
+    background: blue;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 100px;
+    height: 34px;
+}
+
+li {
+    display: inline-block;
+}
+
+.token-text-01 {
+    color: white
+}
+.token-text-02{
+    color: grey;
 }
