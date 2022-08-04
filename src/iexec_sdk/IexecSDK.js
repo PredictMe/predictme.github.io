@@ -2,7 +2,7 @@ import {
     IExec,
     utils
 } from "iexec";
-
+import Web3 from 'web3';
 
 class IexecSDK{
     iexec;
@@ -10,7 +10,8 @@ class IexecSDK{
 
     }
 
-    async init(){
+    async init(onConnected){
+        await this.changeNetwork()
         try {
         let ethProvider;
 
@@ -56,19 +57,48 @@ class IexecSDK{
             ethProvider,
             chainId: networkVersion
         });
+        onConnected()
         this.iexec = iexec
-        await this.refreshUser(iexec);
-        await this.checkStorage(iexec);
+        await this.refreshUser();
+        await this.checkStorage();
     } catch (e) {
         console.error(e.message);
         }
     }
 
-    async refreshUser(iexec) {
-        const userAddress = await iexec.wallet.getAddress();
+    async changeNetwork(){
+        const chainId = 134 // Polygon Mainnet
+
+        if (window.ethereum.networkVersion !== chainId) {
+            try {
+                await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: Web3.utils.toHex(chainId) }]
+            });
+        } catch (err) {
+          // This error code indicates that the chain has not been added to MetaMask
+                if (err.code === 4902) {
+                await window.ethereum.request({
+                    method: 'wallet_addEthereumChain',
+                    params: [
+                     {
+                        chainName: 'Bellecour Sidechain',
+                        chainId: Web3.utils.toHex(chainId),
+                        nativeCurrency: { name: 'xRLC', decimals: 18, symbol: 'xRLC' },
+                        rpcUrls: ['https://bellecour.iex.ec']
+                 }
+            ]
+          });
+        }
+      }
+    }
+    }
+
+    async refreshUser() {
+        const userAddress = await this.iexec.wallet.getAddress();
         const [wallet, account] = await Promise.all([
-            iexec.wallet.checkBalances(userAddress),
-            iexec.account.checkBalance(userAddress)
+            this.iexec.wallet.checkBalances(userAddress),
+            this.iexec.account.checkBalance(userAddress)
         ]);
         //const nativeWalletText = `Native : ${utils.formatEth(wallet.wei).substring(0, 6)} RLC`;
         console.log(`Native : ${utils.formatEth(wallet.wei).substring(0, 6)} RLC`)
@@ -78,25 +108,25 @@ class IexecSDK{
         console.log(`Wallet : ${account.stake} nRLC`)
     };
 
-    async checkStorage (iexec) {
+    async checkStorage () {
         try {
             
-            const isStorageInitialized = await iexec.storage.checkStorageTokenExists(
-                await iexec.wallet.getAddress()
+            const isStorageInitialized = await this.iexec.storage.checkStorageTokenExists(
+                await this.iexec.wallet.getAddress()
             );
             
-            if (isStorageInitialized) {console.log("initialized")};
-            if (!isStorageInitialized) {console.log("not initialized")};
+            if (isStorageInitialized) {console.log("storage initialized")};
+            if (!isStorageInitialized) {console.log("storage not initialized")};
         } catch (error) {
             console.log(error)
         }
     };
 
-    async initStorage (iexec) {
+    async initStorage () {
         try {
             
-            const storageToken = await iexec.storage.defaultStorageLogin();
-            await iexec.storage.pushStorageToken(storageToken, {
+            const storageToken = await this.iexec.storage.defaultStorageLogin();
+            await this.iexec.storage.pushStorageToken(storageToken, {
                 forceUpdate: true
             });
             this.checkStorage(this.iexec);

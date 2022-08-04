@@ -1,18 +1,36 @@
 import React, {Component, PureComponent} from 'react'
 import "./Dapp.css"
-import { Button } from 'react-bootstrap'
 import Chart from "./Chart"
 import { TokenItems } from './TokenItems'
 import NavBarDapp from './NavBarDapp'
-export default class Dapp extends Component{
+import { IexecSDK } from '../../../iexec_sdk/IexecSDK';
 
-  connectToWallet(){
-    console.log("clicked")
+
+export default class Dapp extends Component{
+  iexecSDK
+  isConnected = false
+  constructor(props){
+    super(props)
+    this.iexecSDK = new IexecSDK()
   }
+
+   connectToWallet = async () =>{
+    console.log("connect to wallet")
+    this.iexecSDK.init(this.onConnected)
+  }
+
+  onConnected = async () => {
+    this.isConnected = true
+    console.log(this.isConnected)
+    await this.iexecSDK.initStorage()
+    await this.iexecSDK.checkStorage()
+  }
+
     render() {
+
         return (
           <div className='layout-01'>
-            <NavBarDapp onClick={this.connectToWallet}></NavBarDapp>
+            <NavBarDapp onConnectToWallet={this.connectToWallet}></NavBarDapp>
             <div className='token-menu'>
             <ul>
                     {
@@ -35,4 +53,3 @@ export default class Dapp extends Component{
 
       
 }
-

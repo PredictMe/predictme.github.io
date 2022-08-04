@@ -2,13 +2,15 @@ import React, { Component, useState } from 'react'
 import './NavBarDapp.css'
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
-import { IexecSDK } from '../../../iexec_sdk/IexecSDK';
 
 export default class NavBarDapp extends Component {
+    constructor(props){
+        super(props)
 
+    }
     state = {scroll : false}
 
-
+ 
 
 onScroll = () => {
     if(window.scrollY >= 80){
@@ -18,6 +20,9 @@ onScroll = () => {
     }
     
     
+}   
+onClick = () => {
+    this.props.onConnectToWallet()
 }
 
   render() {
@@ -26,8 +31,9 @@ onScroll = () => {
         <nav    className={this.state.scroll ? 'NavbarItems active' : 'NavbarItems'}>
            <Link to="/"><h1 className='navbar-logo'>PredictMe <i className='lni lni-react'></i></h1></Link> 
 
-        <Button onClick={this.props.onClick}>Connect Wallet</Button>
+        <Button onClick={this.onClick}>Connect Wallet</Button>
         </nav>
     )
   }
 }
+
