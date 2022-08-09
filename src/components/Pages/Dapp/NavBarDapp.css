@@ -35,3 +35,15 @@
     color: white;
     white-space: nowrap;
 }
+
+.nav-balance {
+    display: grid;
+    grid-template-columns: repeat(3,auto);
+    grid-gap: 10px;
+    list-style: none;
+    text-align: left;
+    width: 70vw;
+    justify-content: end;
+    margin-right: 10px;
+    color: white;
+}

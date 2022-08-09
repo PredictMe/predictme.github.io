@@ -1,0 +1,13 @@
+
+.token-list{
+    font-size: 1.0rem;
+    cursor: pointer;
+}
+
+li {
+    margin: 10px;
+}
+
+.token-list.active{
+    font-size: 1.5rem;
+}

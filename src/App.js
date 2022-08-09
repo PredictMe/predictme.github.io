@@ -4,7 +4,7 @@ import NavBarController from './components/Navbar/NavBarController';
 import Overview from './components/Pages/Overview/Overview';
 import Docs from './components/Pages/Docs/Docs';
 import Dapp from './components/Pages/Dapp/Dapp'
-
+import Footer from './components/Footer/Footer';
 import { BrowserRouter, Routes, Route, Link, useLocation } from "react-router-dom";
 
 function App() {
@@ -13,12 +13,13 @@ function App() {
     <div className="App">
       
       <BrowserRouter>
-      <NavBarController/>
+      <NavBarController />
       <Routes>
         <Route path='/' element={<Overview/>}/>
         <Route path='/Docs' element={<Docs/>}/>
         <Route path='/Dapp' element={<Dapp/>}/>
       </Routes>
+      <Footer/>
       </BrowserRouter>
       
     </div>

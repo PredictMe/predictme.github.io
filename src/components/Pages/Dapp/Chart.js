@@ -1,6 +1,6 @@
 import React, {Component , PureComponent} from 'react'
 import { LineChart, Line, Area , XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,ComposedChart } from 'recharts';
-
+import { TokenItems } from './TokenItems';
 const data = [
     {
       name: 'Page A',
@@ -78,6 +78,9 @@ const data = [
   
 
 export default class Chart extends Component{
+  constructor(props){
+    super(props)
+  }
 
 
     render() {
@@ -88,19 +91,19 @@ export default class Chart extends Component{
             data={data}
             margin={{
               top: 20,
-              right: -0,
+              right: -3,
               bottom: 20,
               left: -65,
             }}
           >
               <defs>
                 <linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0">
-                  <stop stopColor="#6B8DE3" />
-                  <stop offset="1" stopColor="#7D1C8D" />
+                  <stop stopColor={this.props.selectedToken.color1} />
+                  <stop offset="1" stopColor={this.props.selectedToken.color1} />
                 </linearGradient>
                 <linearGradient id="paint1_linear" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#8884d8" stopOpacity={0.8} />
-                <stop offset="95%" stopColor="#8884d8" stopOpacity={0.0} />
+                <stop offset="5%" stopColor={this.props.selectedToken.color1} stopOpacity={0.8} />
+                <stop offset="95%" stopColor={this.props.selectedToken.color1} stopOpacity={0.0} />
               </linearGradient>
               </defs>
               
@@ -110,7 +113,7 @@ export default class Chart extends Component{
               <YAxis tickLine={false} tick={false} axisLine={false}/>
               <Tooltip />
               <Legend />
-              <Area type="monotone" dataKey="pv" fill="url(#paint1_linear)" legendType="none" stroke="url(#paint0_linear)" />
+              <Area type="monotone" dataKey="pv" fill="url(#paint1_linear)" legendType="none" stroke="none" animationBegin={80} />
               <Line type="monotone" dataKey="pv" stroke="url(#paint0_linear)" strokeWidth="4" dot={<CustomizedDot />} legendType="none" label={<CustomizedLabel />}  />
             </ComposedChart>
           </ResponsiveContainer>

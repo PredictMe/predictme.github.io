@@ -1,0 +1,14 @@
+
+:root {
+    --background: #191B1F;
+    --button-primary: #0D6EFD;
+    --button-border: #15376C;
+}
+
+
+.footer {
+    background: var(--button-primary);
+    bottom: 0px;
+    width: 100%;
+    height: 70px;
+}

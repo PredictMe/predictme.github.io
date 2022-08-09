@@ -5,6 +5,7 @@
 }
 
 .NavbarItems{
+    z-index: 3;
     position: fixed;
     background: var(--background);
     width: 100%;
@@ -13,13 +14,13 @@
     justify-content: space-between;
     align-items: center;
     font-size: 1.2rem;
-    z-index: 1;
     transition: all 0.25s ease;
     
     
 }
 
 .NavbarItems.active{
+    z-index: 3;
     background: var(--button-border);
     transition: all 0.5s ease;
 }
@@ -95,11 +96,12 @@ a {
     }
 
     .nav-menu.active {
+
         background: var(--background);
         left: 0;
         opacity: 1;
         transition: all 0.5s ease;
-        z-index: 1;
+        z-index: 3;
         font-size: 1.5rem;
     }
 

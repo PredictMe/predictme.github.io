@@ -3,308 +3,272 @@ import {
     utils
 } from "iexec";
 import Web3 from 'web3';
+import {unzip} from 'unzipit';
 
-class IexecSDK{
+class IexecSDK {
     iexec;
-    constructor(){
+    constructor() {
 
     }
 
-    async init(onConnected){
+    async init() {
         await this.changeNetwork()
         try {
-        let ethProvider;
+            let ethProvider;
 
-        window.ethereum.on('chainChanged', () => { document.location.reload() })
+            window.ethereum.on('chainChanged', () => { document.location.reload() })
 
-        if (window.ethereum) {
-            console.log("using default provider");
-            ethProvider = window.ethereum;
-        }
+            if (window.ethereum) {
+                console.log("using default provider");
+                ethProvider = window.ethereum;
+            }
 
-        let networkmap = new Map([
-            [134, "Bellecour Sidechain"]
-        ]);
+            let networkmap = new Map([
+                [134, "Bellecour Sidechain"]
+            ]);
 
-        await ethProvider.enable();
+            await ethProvider.enable();
 
-        const {
-            result
-        } = await new Promise((resolve, reject) =>
-            ethProvider.sendAsync({
+            const {
+                result
+            } = await new Promise((resolve, reject) =>
+                ethProvider.sendAsync({
                     jsonrpc: "2.0",
                     method: "net_version",
                     params: []
                 },
-                (err, res) => {
-                    if (!err) resolve(res);
-                    reject(Error(`Failed to get network version from provider: ${err}`));
-                }
-            )
-        );
+                    (err, res) => {
+                        if (!err) resolve(res);
+                        reject(Error(`Failed to get network version from provider: ${err}`));
+                    }
+                )
+            );
 
-        const networkVersion = result;
+            const networkVersion = result;
 
-        if (networkmap.get(parseInt(networkVersion)) == undefined) {
-            const error = `Unsupported network ${networkVersion}`;
-            throw Error(error);
-            //not on the correct network
-        }
+            if (networkmap.get(parseInt(networkVersion)) == undefined) {
+                const error = `Unsupported network ${networkVersion}`;
+                throw Error(error);
+            }
 
-            //networkOutput.innerText = networkmap.get(parseInt(networkVersion));
 
-        let iexec = new IExec({
-            ethProvider,
-            chainId: networkVersion
-        });
-        onConnected()
-        this.iexec = iexec
-        await this.refreshUser();
-        await this.checkStorage();
-    } catch (e) {
-        console.error(e.message);
+            let iexec = new IExec({
+                ethProvider,
+                chainId: networkVersion
+            });
+            this.iexec = iexec
+            //await this.refreshUser();
+            //await this.checkStorage();
+        } catch (error) {
+            console.log("init", error);
         }
     }
 
-    async changeNetwork(){
-        const chainId = 134 // Polygon Mainnet
+    async changeNetwork() {
+        const chainId = 134 // Bellecour TestNet
 
         if (window.ethereum.networkVersion !== chainId) {
             try {
                 await window.ethereum.request({
-                method: 'wallet_switchEthereumChain',
-                params: [{ chainId: Web3.utils.toHex(chainId) }]
-            });
-        } catch (err) {
-          // This error code indicates that the chain has not been added to MetaMask
+                    method: 'wallet_switchEthereumChain',
+                    params: [{ chainId: Web3.utils.toHex(chainId) }]
+                });
+            } catch (err) {
+                // This error code indicates that the chain has not been added to MetaMask
                 if (err.code === 4902) {
-                await window.ethereum.request({
-                    method: 'wallet_addEthereumChain',
-                    params: [
-                     {
-                        chainName: 'Bellecour Sidechain',
-                        chainId: Web3.utils.toHex(chainId),
-                        nativeCurrency: { name: 'xRLC', decimals: 18, symbol: 'xRLC' },
-                        rpcUrls: ['https://bellecour.iex.ec']
-                 }
-            ]
-          });
+                    await window.ethereum.request({
+                        method: 'wallet_addEthereumChain',
+                        params: [
+                            {
+                                chainName: 'Bellecour Sidechain',
+                                chainId: Web3.utils.toHex(chainId),
+                                nativeCurrency: { name: 'xRLC', decimals: 18, symbol: 'xRLC' },
+                                rpcUrls: ['https://bellecour.iex.ec']
+                            }
+                        ]
+                    });
+                }
+            }
         }
-      }
-    }
     }
 
-    async refreshUser() {
+    async getUserAccountBalance() {
         const userAddress = await this.iexec.wallet.getAddress();
         const [wallet, account] = await Promise.all([
             this.iexec.wallet.checkBalances(userAddress),
             this.iexec.account.checkBalance(userAddress)
         ]);
-        //const nativeWalletText = `Native : ${utils.formatEth(wallet.wei).substring(0, 6)} RLC`;
-        console.log(`Native : ${utils.formatEth(wallet.wei).substring(0, 6)} RLC`)
-        //const rlcWalletText = `${utils.formatRLC(wallet.nRLC)} RLC`;
-        console.log(`${utils.formatRLC(wallet.nRLC)} RLC`)
-        //accountOutput.innerText = `Wallet : ${account.stake} nRLC`;
-        console.log(`Wallet : ${account.stake} nRLC`)
+        let native = utils.formatEth(wallet.wei).substring(0, 6)
+        let nrlc = utils.formatRLC(wallet.nRLC)
+        let walletStake = account.stake
+        return { native: native, nrlc: nrlc, walletStake: walletStake }
     };
 
-    async checkStorage () {
+    async checkStorage() {
         try {
-            
+
             const isStorageInitialized = await this.iexec.storage.checkStorageTokenExists(
                 await this.iexec.wallet.getAddress()
             );
-            
-            if (isStorageInitialized) {console.log("storage initialized")};
-            if (!isStorageInitialized) {console.log("storage not initialized")};
+
+            if (isStorageInitialized) { return true };
+            if (!isStorageInitialized) { return false };
         } catch (error) {
             console.log(error)
         }
     };
 
-    async initStorage () {
+    async initStorage() {
         try {
-            
+
             const storageToken = await this.iexec.storage.defaultStorageLogin();
             await this.iexec.storage.pushStorageToken(storageToken, {
                 forceUpdate: true
             });
             this.checkStorage(this.iexec);
         } catch (error) {
-            console.log(error)
-        } finally {
-            //storageInitButton.disabled = false;
+            console.log("initStorage", error)
         }
     };
 
-    async showApp (iexec,appAddress) {
+    async showApp(appAddress) {
         try {
-    
-            
-            const appAddress =""
-            const res = await iexec.app.showApp(appAddress);
-            //appsShowOutput.innerText = JSON.stringify(res, null, 2);
+
+
+            const res = await this.iexec.app.showApp(appAddress);
+            return res
         } catch (error) {
-            //appsShowError.innerText = error;
-            //docbody.classList.remove("waiting");
-        } finally {
-            //docbody.classList.remove("waiting");
-            //appsShowButton.disabled = false;
+            console.log("showApp", error)
         }
     };
 
-    async showWorkerpoolOrderbook (iexec){
+    async showWorkerpoolOrderbook(workerpoolAddress) {
         try {
-            
-            const workerpoolAddress ="";
-            const {
-                orders
-            } = await iexec.orderbook.fetchWorkerpoolOrderbook({workerpool:workerpoolAddress});
-        
-            if (orders[0] === undefined){
-               // workerpoolOrderbookShowOutput.innerText = "No order found for the given address."
-            }else {
-           // workerpoolOrderbookShowOutput.innerText = JSON.stringify(orders[0], null, 2);
-        }
-    
+
+            const workerpoolOrders = await this.iexec.orderbook.fetchWorkerpoolOrderbook({ workerpool: workerpoolAddress });
+
+            if (workerpoolOrders.orders[0] !== undefined) {
+                return workerpoolOrders.orders[0]
+            } else {
+                console.log("showWorkerpoolOrderbook", "no workerpool orderbook orders")
+            }
+
         } catch (error) {
-          //  workerpoolOrderbookShowError.innerText = error;
-           // docbody.classList.remove("waiting");
-        } finally {
-          //  workerpoolOrderbookShowButton.disabled = false;
-          //  docbody.classList.remove("waiting");
+            console.log("showWorkerpoolOrderbook", error)
         }
     };
 
-    async showOrderbook (iexec,appAddress) {
+    async showOrderbook(appAddress) {
         try {
-            
-            const {
-                orders
-            } = await iexec.orderbook.fetchAppOrderbook(appAddress);
-            if (orders[0] === undefined){
-             //   appOrderbookShowOutput.innerText = "No order found for the given address."
-            }else {
-            //appOrderbookShowOutput.innerText = JSON.stringify(orders[0], null, 2);
+
+            const appOrders = await this.iexec.orderbook.fetchAppOrderbook(appAddress);
+
+            if (appOrders.orders[0] !== undefined) {
+                return appOrders.orders[0]
+            } else {
+                console.log("showOrderbook", "no apporderbook orders")
             }
         } catch (error) {
-           // appOrderbookShowError.innerText = error;
-         //   docbody.classList.remove("waiting");
-        } finally {
-          //  appOrderbookShowButton.disabled = false;
-           // docbody.classList.remove("waiting");
+            console.log("showOrderbook", error)
         }
     };
 
-    async buyComputation(iexec, appAddress, category, params, workerpool, trustLevel)  {
+    async buyComputation(appAddress, category, params, workerpool, trustLevel, onComputationProgress) {
         try {
-            
-            //const appAddress = "buyAppAddressInput.value";
-            //const category = "buyCategoryInput.value";
-            //const params = "buyParamsInput.value";
-            //const workerpool = "buyWorkerpoolInput.value";
-            //const trustLevel = "buyTrustInput.value";
-            const {
-                orders
-            } = await iexec.orderbook.fetchAppOrderbook(appAddress);
-            const appOrder = orders && orders[0] && orders[0].order;
+
+
+            const appOrders = await this.iexec.orderbook.fetchAppOrderbook(appAddress);
+            //console.log("appOrders",appOrders)
+            const appOrder = appOrders.orders[0]
+            //console.log("appOrder",appOrder)
             if (!appOrder) throw Error(`no apporder found for app ${appAddress}`);
-    
-            const workerPoolRes = await iexec.orderbook.fetchWorkerpoolOrderbook(
-                {workerpool: workerpool,
-                category: category,
-                minTrust : trustLevel}
+            const workerpoolOrders = await this.iexec.orderbook.fetchWorkerpoolOrderbook(
+                { category },
             );
-            const workerPoolOrders = workerPoolRes.orders;
-            const workerpoolOrder =
-            workerPoolOrders && workerPoolOrders[0] && workerPoolOrders[0].order;
+            //console.log("workerpoolOrders",workerpoolOrders)
+            const workerpoolOrder = workerpoolOrders.orders[0];
+            console.log("workerpoolOrder", workerpoolOrder)
             if (!workerpoolOrder)
-                throw Error(`no workerpoolorder found for the selected options: category ${category}, trust level ${trustLevel}`);
-    
-            const userAddress = await iexec.wallet.getAddress();
-    
-            const requestOrderToSign = await iexec.order.createRequestorder({
+                throw Error(`no workerpoolorder found for category ${category}`);
+
+            const userAddress = await this.iexec.wallet.getAddress();
+
+            const requestOrderToSign = await this.iexec.order.createRequestorder({
                 app: appAddress,
-                appmaxprice: appOrder.appprice,
-                workerpoolmaxprice: workerpoolOrder.workerpoolprice,
+                appmaxprice: appOrder.order.appprice,
+                workerpoolmaxprice: workerpoolOrder.order.workerpoolprice,
                 requester: userAddress,
-                workerpool: workerpool,
+                //workerpool: workerpoolOrder.order.workerpool,
                 volume: 1,
-                params: params,
-                trust: trustLevel,
-                category: category
+                params,
+                category,
             });
-    
-            const requestOrder = await iexec.order.signRequestorder(requestOrderToSign);
-    
-            const res = await iexec.order.matchOrders({
-                apporder: appOrder,
+            onComputationProgress(1)
+            const requestOrder = await this.iexec.order.signRequestorder(requestOrderToSign);
+            //console.log("requestOrder",requestOrder)
+            const res = await this.iexec.order.matchOrders({
+                apporder: appOrder.order,
                 requestorder: requestOrder,
-                workerpoolorder: workerpoolOrder
+                workerpoolorder: workerpoolOrder.order,
             });
-            //buyBuyOutput.innerText = JSON.stringify(res, null, 2);
-            //resultsDealidInput.value = res.dealid;
-            this.refreshUser(this.iexec);
-            return res.dealid;
-            
-
+            onComputationProgress(2)
+            console.log("res_dealid", res.dealid)
+            return res.dealid
         } catch (error) {
-           // buyBuyError.innerText = error;
-            //docbody.classList.remove("waiting");
-        } finally {
-           // buyBuyButton.disabled = false;
-          //  docbody.classList.remove("waiting");
+            console.log("buyComputation", error)
         }
     };
 
-    async showDeal (iexec, dealid)  {
+    async showDeal(dealid) {
         try {
-            
-            //const dealid = resultsDealidInput.value;
-            const deal = await iexec.deal.show(dealid);
-            //resultsShowDealOutput.innerText = JSON.stringify(deal, null, 2);
-                //resultsTaskidInput.value = deal.tasks["0"];
-                //resultsDownloadInput.value = deal.tasks["0"];
+
+            const deal = await this.iexec.deal.show(dealid);
+            console.log("showDeal[''0'']", deal.tasks["0"])
+            console.log("showDeal[0]", deal)
+            return deal.tasks["0"]
         } catch (error) {
-            //resultsShowDealError.innerText = error;
-            //docbody.classList.remove("waiting");
+            console.log("showDeal", error)
         } finally {
-            //resultsShowDealButton.disabled = false;
-            //docbody.classList.remove("waiting");
         }
     };
 
-    async showTask (iexec, taskid) {
+    async showTask(taskid) {
         try {
-            
-            //const taskid = resultsTaskidInput.value;
-            const res = await iexec.task.show(taskid);
-                //resultsShowTaskOutput.innerText = JSON.stringify(res, null, 2);
+
+            const res = await this.iexec.task.show(taskid);
+            return res
+
         } catch (error) {
-            //resultsShowTaskError.innerText = error;
-            //docbody.classList.remove("waiting");
+            console.log("showTask", error)
+            return false
         } finally {
-            //resultsShowTaskButton.disabled = false;
-            //docbody.classList.remove("waiting");
         }
     };
 
-    async dowloadResults (iexec,taskid)  {
+    async dowloadResults(taskid) {
         try {
-            
-            //const taskid = resultsDownloadInput.value;
-            const res = await iexec.task.fetchResults(taskid, {
+
+
+            const res = await this.iexec.task.fetchResults(taskid, {
                 ipfsGatewayURL: "https://ipfs.iex.ec"
             });
+
             const file = await res.blob();
-            //const fileName = `${taskid}.zip`;
-           
+            const {entries} = await unzip(file);
+            for (const [name, entry] of Object.entries(entries)) {
+                console.log(name, entry.size);
+                if(name == "result.txt"){
+                    console.log("this is computed file")
+                    console.log(entry)
+                    let text = await entry.json()
+                    console.log(text)
+                }
+              }
+            return file
+
         } catch (error) {
-            //resultsDownloadError.innerText = error;
-            //docbody.classList.remove("waiting");
+            console.log("dowloadResults", error)
         } finally {
-            //resultsDownloadButton.disabled = false;
-            //docbody.classList.remove("waiting");
         }
     };
 
