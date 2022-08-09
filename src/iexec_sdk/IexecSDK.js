@@ -92,7 +92,7 @@ class IexecSDK {
         }
     }
 
-    async getUserAccountBalance() {
+    async getUserAccount() {
         const userAddress = await this.iexec.wallet.getAddress();
         const [wallet, account] = await Promise.all([
             this.iexec.wallet.checkBalances(userAddress),
@@ -101,7 +101,7 @@ class IexecSDK {
         let native = utils.formatEth(wallet.wei).substring(0, 6)
         let nrlc = utils.formatRLC(wallet.nRLC)
         let walletStake = account.stake
-        return { native: native, nrlc: nrlc, walletStake: walletStake }
+        return { userAddress : userAddress, native: native, nrlc: nrlc, walletStake: walletStake }
     };
 
     async checkStorage() {

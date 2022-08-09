@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import { TokenItems } from './TokenItems'
+import { TokenItems } from '../../TokenItems'
 import './TokenSelector.css'
 export default class TokenSelector extends Component {
 
 constructor(props){
     super(props)
-
+    this.state = {
+      activeId : props.selectedToken
+  }
 }
 
-state = {
-    activeId : 1
-}
+
 
 OnClick(event){
     console.log(event.currentTarget.dataset.id)

@@ -1,11 +1,13 @@
 import React, {Component, PureComponent} from 'react'
 import "./Dapp.css"
-import Chart from "./Chart"
-import NavBarDapp from './NavBarDapp'
+import Chart from "./components/Chart/Chart"
+import NavBarDapp from './components/NavBarDapp/NavBarDapp'
 import { IexecSDK } from '../../../iexec_sdk/IexecSDK';
-import TokenSelector from './TokenSelector'
+import TokenSelector from './components/TokenSelector/TokenSelector'
 import { TokenItems } from './TokenItems';
 import { useState } from 'react';
+import { motion } from 'framer-motion'
+import ConnectToDapp from './components/ConnectToDapp/ConnectToDapp'
 
 export default class Dapp extends Component{
   iexecSDK
@@ -16,32 +18,56 @@ export default class Dapp extends Component{
     this.iexecSDK = new IexecSDK()
     this.state={
       navbarkey : 0,
+      connectSetup : false,
+      connectSetupKey : 0,
+      userAddress : null,
       isConnected : false,
+      isWalletConnected : false,
+      isStorageInitialized : false,
       walletBalance : null,
       selectedTokenId : 0,
-      isStorageInitialized : false,
       selectedToken : TokenItems[0],
-      chartKey : 0
+      chartKey : 0,
+      
     }
   }
 
-   connectToWallet = async () =>{
+   connectToDapp = async () =>{
     console.log("connect to wallet")
-    await this.iexecSDK.init()
-    await this.onConnected()
+    this.setState({connectSetup : true})
+    //await this.onConnected()
+    await this.onConectToWallet()
   }
 
-   onConnected =  async () => {
-    
-    let walletBalance = await this.iexecSDK.getUserAccountBalance()
-    this.setState({walletBalance : walletBalance})
-    let navbarkey = this.state.navbarkey + 1
-    this.setState({navbarkey : navbarkey})
-    this.setState({isConnected : true})
+  async onConectToWallet(){
+    await this.iexecSDK.init()
+    this.setState({isWalletConnected : true})
+    let connectSetupKey = this.state.connectSetupKey + 1
+    this.setState({connectSetupKey : connectSetupKey})
+  }
+
+  async onConnectToStorage(){
     await this.iexecSDK.initStorage()
     let isStorageInitialized = this.iexecSDK.checkStorage()
     if(isStorageInitialized != this.state.isStorageInitialized){this.setState({isStorageInitialized: isStorageInitialized})}
-    //await this.iexecSDK.checkStorage()
+   
+    this.setState({connectSetup : false})
+    let connectSetupKey = this.state.connectSetupKey + 1
+    this.setState({connectSetupKey : connectSetupKey})
+    await this.onConnected()
+  }
+
+   async onConnected () {
+    
+    let {native,userAddress } = await this.iexecSDK.getUserAccount()
+    this.setState({walletBalance : native})
+    this.setState({userAddress : userAddress})
+    this.setState({isConnected : true})
+    console.log(userAddress)
+    
+    
+    let navbarkey = this.state.navbarkey + 1
+    this.setState({navbarkey : navbarkey})
   }
 
   onTokenSelect(id){
@@ -92,14 +118,12 @@ export default class Dapp extends Component{
 
         return (
           <div className='layout-01'>
-            <NavBarDapp key={this.state.navbarkey} onConnectToWallet={this.connectToWallet.bind(this)}  isConnected={this.state.isConnected} walletBalance={this.state.walletBalance}></NavBarDapp>
-            <div className='token-selector-container'> <TokenSelector onTokenSelect={this.onTokenSelect.bind(this)}/> </div>
+            <div className={this.state.connectSetup ? 'connectSetup active' : 'connectSetup'}><ConnectToDapp key={this.state.connectSetupKey} isStorageConnected={this.state.isStorageInitialized}isWalletConnected={this.state.isWalletConnected} onConnectToWallet={this.onConectToWallet.bind(this)}onConnectToStorage={this.onConnectToStorage.bind(this)}/></div>
+            <NavBarDapp key={this.state.navbarkey} onConnectToDapp={this.connectToDapp.bind(this)}  isConnected={this.state.isConnected} userAddress={this.state.userAddress} walletBalance={this.state.walletBalance}></NavBarDapp>
+            <div className='token-selector-container'> <TokenSelector selectedToken={this.state.selectedTokenId} onTokenSelect={this.onTokenSelect.bind(this)}/> </div>
             <div className='dapp-container'>
-          <div className='chart-container'>
-            <Chart key={this.state.chartKey} selectedToken={this.state.selectedToken}/>
-            </div>
-           <div className='button-dapp' onClick={this.onBuyComputation.bind(this)}> </div>
-           <div><h3>{this.state.isStorageInitialized ? "storage is initialized" : "storage is not initialized"}</h3> </div> 
+          <div className='chart-container'> <Chart key={this.state.chartKey} selectedToken={this.state.selectedToken}/> </div>
+           <div className='button-dapp' onClick={this.onBuyComputation.bind(this)}>Buy computation</div>
         </div>
         </div>
         )

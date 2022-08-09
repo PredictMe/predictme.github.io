@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react'
 import {MenuItems} from './MenuItems'
-import { AppButton } from './AppButton'
+import { AppButton } from './components/AppButton/AppButton'
 import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import './Navbar.css'

@@ -1,6 +1,6 @@
 import React, {Component , PureComponent} from 'react'
 import { LineChart, Line, Area , XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,ComposedChart } from 'recharts';
-import { TokenItems } from './TokenItems';
+import { TokenItems } from '../../TokenItems';
 const data = [
     {
       name: 'Page A',
@@ -114,7 +114,7 @@ export default class Chart extends Component{
               <Tooltip />
               <Legend />
               <Area type="monotone" dataKey="pv" fill="url(#paint1_linear)" legendType="none" stroke="none" animationBegin={80} />
-              <Line type="monotone" dataKey="pv" stroke="url(#paint0_linear)" strokeWidth="4" dot={<CustomizedDot />} legendType="none" label={<CustomizedLabel />}  />
+              <Line type="monotone" dataKey="pv" stroke="url(#paint0_linear)" strokeWidth="4" dot={<CustomizedDot />} legendType="none"/>
             </ComposedChart>
           </ResponsiveContainer>
         )

@@ -1,0 +1,59 @@
+:root {
+    --primary: #0D6EFD;
+    --border: #15376C;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: flex-start;
+    border-radius: 12px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: var(--border);
+}
+
+.setupText {
+    align-items: flex-start;
+    justify-content: start;
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+.button-connect-wallet {
+    display: none;
+}
+
+.button-connect-wallet.active{
+    display: block;
+    padding: 8px 20px;
+    border-radius: 12px;
+    outline: none;
+    border: 3px solid var(--border);
+    cursor: pointer;
+    background: var(--primary);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.button-connect-storage {
+    display: none;
+}
+
+.button-connect-storage.active {
+    display: block;
+    padding: 8px 20px;
+    border-radius: 12px;
+    outline: none;
+    border: 3px solid var(--border);
+    cursor: pointer;
+    background: var(--primary);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    white-space: nowrap;
+}

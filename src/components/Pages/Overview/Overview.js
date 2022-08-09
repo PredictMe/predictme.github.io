@@ -1,6 +1,6 @@
 import React from 'react'
 import './Overview.css'
-import Chart from './../Dapp/Chart'
+import Chart from './../Dapp/components/Chart/Chart'
 import {TokenItems} from './../Dapp/TokenItems'
 
 function Overview() {
