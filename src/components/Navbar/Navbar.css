@@ -1,14 +1,14 @@
 :root {
-    --background: #191B1F;
+    --background: #191b1f;
     --button-primary: #0D6EFD;
     --button-border: #15376C;
 }
 
-.NavbarItems{
+.Navbar {
     z-index: 3;
     position: fixed;
     background: var(--background);
-    width: 100%;
+    width: 100vw;
     height: 80px;
     display: flex;
     justify-content: space-between;
@@ -16,25 +16,42 @@
     font-size: 1.2rem;
     transition: all 0.25s ease;
     
+}
+
+.Navbar.active{
+    z-index: 3;
+    transition: all 0.5s ease;
+    background: rgba(25,27,31,0.6);
+    backdrop-filter: blur(20px);
+}
+
+.navbar-logo-container{
+    display: flex;
+    margin-left: 4vw;
+    justify-content: center;
+    align-items: center;
     
 }
-
-.NavbarItems.active{
-    z-index: 3;
-    background: var(--button-border);
-    transition: all 0.5s ease;
-}
-
-.navbar-logo {
-    justify-content: right;
-    margin-left: 4vw;
+.navbar-logo-text {
     cursor: pointer;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size:  2.1rem;
     color: white;
     white-space: nowrap;
+    margin-left: 0px;
+    padding-left: 0px;
+    left: 0px;
 }
+
+.navbar-logo-img {
+    height: 45px;
+    margin-right: 5px;
+    padding-right: 0px;
+    right: 0px;
+
+}
+
 a {
     text-decoration: none;
 }
@@ -78,29 +95,45 @@ a {
     display: none;
 }
 
+
+
+
 @media screen and (max-width: 960px){
     .NavbarItems {
         position: relative;
     }
 
+    .Navbar.active{
+        z-index: 3;
+        transition: all 0.5s ease;
+        background: var(--background);
+        backdrop-filter: blur(0px);
+    }
+
+   
+    li {
+        background: var(--background);
+    }
+
+    
+
     .nav-menu {
+        position: fixed;
         display: flex;
         flex-direction: column;
         width: 100%;
         height: 350px;
-        position: absolute;
-        top: 80px;
         left: -100%;
         opacity: 1;
-        transition: all 0.5s ease;
     }
 
     .nav-menu.active {
-
+        position: fixed;
         background: var(--background);
+        top: 0px;
+        margin-top: 120px;
         left: 0;
         opacity: 1;
-        transition: all 0.5s ease;
         z-index: 3;
         font-size: 1.5rem;
     }
@@ -118,11 +151,27 @@ a {
         border-radius: 0;
     }
 
-    .navbar-logo {
+    .navbar-logo-container {
         position: absolute;
-        margin-left: 2rem;
+        display: flex;
+        left: 0px;
+        justify-content: space-around;
+        align-items: center;
+        
+    }
+
+    .navbar-logo-text {
         left: 0;
-        transform: translate(25% 50%);
+        margin-left: 0px;
+        padding-left: 0px;
+    }
+
+    .navbar-logo-img {
+        height: 45px;
+        margin-right: 5px;
+        padding-right: 0px;
+        right: 0px;
+    
     }
 
     .menu-icon {

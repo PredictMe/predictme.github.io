@@ -1,0 +1,30 @@
+:root {
+    --background: #191B1F;
+    --button-primary: #0D6EFD;
+    --button-border: #15376C;
+    --chart: #D9D9D9;
+}
+
+.chart-info {
+    z-index: 3;
+    display: flex;
+    position: absolute;
+    width: fit-content;
+    right: 0px;
+    margin: 10px 10px;
+    padding: 5px 5px;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(to bottom right,var(--button-primary),#569aff);
+    border-radius: 10px;
+    
+    
+}
+
+.chart-info-symbol {
+    color: white;
+    font-family: 'inter', 'sans-serif';
+    font-weight: 700;
+    font-size: 1.1rem;
+    padding: 0px 2px;
+}

@@ -4,14 +4,72 @@
     --button-border: #15376C;
 }
 
-s
+
 .docs-container{
     background: var(--background);
-    height: 100vh;
-    width: 100vw;
+    width: 100%;
+    
+}
+
+.docs-layout-1 {
+    margin-top: 80px;
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-shadow: inset 0 0 0 1000px rgba(0,0,0,0.2);
-    object-fit: contain;
+    flex-direction: row;
+    overflow: hidden;
+    justify-content: center;
+    align-items: top;
+}
+
+.docs-layout-11-number {
+    margin-right: 3vw;
+    font-size: 2.5rem;
+    font-family: 'inter', 'sans-serif';
+    font-weight: 600;
+    color: white;
+}
+
+.docs-layout-11-box {
+    width: 80vw;
+}
+
+.docs-layout-2 {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    justify-content: center;
+    align-items: top;
+}
+
+.docs-layout-21-number {
+    margin-right: 3vw;
+    font-size: 2.5rem;
+    font-family: 'inter', 'sans-serif';
+    font-weight: 600;
+    color: white;
+}
+
+.docs-layout-21-box {
+    width: 80vw;
+}
+
+.docs-layout-3 {
+    margin-top: 40px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    justify-content: center;
+    align-items: top;
+}
+
+.docs-layout-31-number {
+    margin-right: 3vw;
+    font-size: 2.5rem;
+    font-family: 'inter', 'sans-serif';
+    font-weight: 600;
+    color: white;
+}
+
+.docs-layout-31-box {
+    width: 80vw;
 }

@@ -1,7 +1,12 @@
 :root {
     --primary: #0D6EFD;
     --border: #15376C;
+    --background: #191b1f;
+    --button-primary: #0D6EFD;
+    --button-border: #15376C;
+    --background-secondary: #30343c;
 }
+
 
 .container{
     display: flex;
@@ -13,7 +18,7 @@
     padding-right: 10px;
     padding-top: 20px;
     padding-bottom: 20px;
-    background: var(--border);
+    background: var(--background-secondary);
 }
 
 .setupText {
@@ -46,7 +51,7 @@
 
 .button-connect-storage.active {
     display: block;
-    padding: 8px 20px;
+    padding: 8px 32px;
     border-radius: 12px;
     outline: none;
     border: 3px solid var(--border);

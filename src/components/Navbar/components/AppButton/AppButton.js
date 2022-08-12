@@ -21,7 +21,7 @@ const SIZES = [
     const checkButtonStyle = STYLES.includes(buttonStyle) ? buttonStyle : STYLES[0]
     const CheckButtonSize = SIZES.includes(buttonSize) ? buttonSize : SIZES[0]
     return(
-        <button className={'btn ${checkButtonStyle} ${CheckButtonSize}'} onClick={onClick} type={type}>
+        <button className={'appbutton-btn ${checkButtonStyle} ${CheckButtonSize}'} onClick={onClick} type={type}>
             {children}
         </button>
     )

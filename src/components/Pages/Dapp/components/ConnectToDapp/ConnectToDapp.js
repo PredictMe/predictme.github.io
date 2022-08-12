@@ -21,7 +21,7 @@ export default class ConnectToDapp extends Component {
   render() {
     return (
       <div className='container'>
-        <h2 className='setupText'>Setup 1/2</h2>
+        <h2 className='setupText'>{this.state.isWalletConnected ? 'Setup 2/2' : 'Setup 1/2'}</h2>
         <div onClick={this.onConnectToWallet.bind(this)} className={this.state.isWalletConnected ? 'button-connect-wallet' : 'button-connect-wallet active'}>Connect to wallet</div>
         <div onClick={this.onConnectToStorage.bind(this)} className={this.state.isWalletConnected ? 'button-connect-storage active' : 'button-connect-storage'}>Initiate storage</div>
         </div>

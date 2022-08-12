@@ -4,7 +4,7 @@
     --button-border: #15376C;
 }
 
-.NavbarItems{
+.NavbarDappItems{
     position: fixed;
     top: 0px;
     background: var(--background);
@@ -20,9 +20,16 @@
     
 }
 
-.NavbarItems.active{
-    background: var(--button-border);
+.NavbarDappItems.active{
+    z-index: 3;
     transition: all 0.5s ease;
+    background: rgba(25,27,31,0.6);
+    backdrop-filter: blur(20px);
+}
+
+.navbardapp-btn {
+    display: flex;
+    margin-right: 4vw;
 }
 
 .account-info {
@@ -45,15 +52,32 @@
     width: 25px;
 }
 
-.navbar-logo {
-    justify-content: right;
+
+.navbardapp-logo-container{
+    display: flex;
     margin-left: 4vw;
+    justify-content: center;
+    align-items: center;
+    
+}
+.navbardapp-logo-text {
     cursor: pointer;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size:  2.1rem;
     color: white;
     white-space: nowrap;
+    margin-left: 0px;
+    padding-left: 0px;
+    left: 0px;
+}
+
+.navbardapp-logo-img {
+    height: 45px;
+    margin-right: 5px;
+    padding-right: 0px;
+    right: 0px;
+
 }
 
 .nav-balance {

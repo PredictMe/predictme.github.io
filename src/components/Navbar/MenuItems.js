@@ -10,8 +10,8 @@ const MenuItems = [
         cName : 'nav-links'
     },
     {
-        title : "Go to App",
-        url : "#",
+        title : "Launch App",
+        url : "/Dapp",
         cName : 'nav-links-mobile'
     }
 ]

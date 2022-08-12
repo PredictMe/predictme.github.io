@@ -3,7 +3,7 @@
     --border: #15376C;
 }
 
-.btn {
+.appbutton-btn {
     float: right;
     margin-right: 4vw;
     padding: 8px 20px;
@@ -20,7 +20,7 @@
 
 }
 
-.btn:hover {
+.appbutton-btn:hover {
     transition: all 0.3s ease-out;
     background: #fff;
     color:  var(--primary);

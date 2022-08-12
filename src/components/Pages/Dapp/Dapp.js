@@ -117,15 +117,15 @@ export default class Dapp extends Component{
     render() {
 
         return (
-          <div className='layout-01'>
+          <div className='dapp-layout-1'>
             <div className={this.state.connectSetup ? 'connectSetup active' : 'connectSetup'}><ConnectToDapp key={this.state.connectSetupKey} isStorageConnected={this.state.isStorageInitialized}isWalletConnected={this.state.isWalletConnected} onConnectToWallet={this.onConectToWallet.bind(this)}onConnectToStorage={this.onConnectToStorage.bind(this)}/></div>
             <NavBarDapp key={this.state.navbarkey} onConnectToDapp={this.connectToDapp.bind(this)}  isConnected={this.state.isConnected} userAddress={this.state.userAddress} walletBalance={this.state.walletBalance}></NavBarDapp>
             <div className='token-selector-container'> <TokenSelector selectedToken={this.state.selectedTokenId} onTokenSelect={this.onTokenSelect.bind(this)}/> </div>
             <div className='dapp-container'>
-          <div className='chart-container'> <Chart key={this.state.chartKey} selectedToken={this.state.selectedToken}/> </div>
-           <div className='button-dapp' onClick={this.onBuyComputation.bind(this)}>Buy computation</div>
-        </div>
-        </div>
+              <div className='chart-container'> <Chart key={this.state.chartKey} selectedToken={this.state.selectedToken}/> </div>
+              <div className={this.state.isConnected ? 'button-dapp active' : 'button-dapp'} onClick={this.state.isConnected ? this.onBuyComputation.bind(this) : null}>Buy computation</div>
+            </div>
+          </div>
         )
       }
 

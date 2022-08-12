@@ -2,9 +2,10 @@
     --background: #191B1F;
     --button-primary: #0D6EFD;
     --button-border: #15376C;
+    --inactive-border: #474747;
 }
 
-.layout-01 {
+.dapp-layout-1 {
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -55,8 +56,8 @@
 }
 
 .button-dapp {
-    background: var(--button-primary);
-    border: 3px solid var(--button-border);
+    background: grey;
+    border: 3px solid var(--inactive-border);
     border-radius: 12px;
     margin-top: 20px;
     padding: 10px 10px 10px 10px;
@@ -65,6 +66,13 @@
     font-size: 1rem;
     font-family: 'inter', 'sans-serif';
     font-weight: 600;
+    cursor: pointer;
+}
+
+.button-dapp.active {
+    background: var(--button-primary);
+    border: 3px solid var(--button-border);
+  
 }
 
 li {

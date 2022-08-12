@@ -14,10 +14,6 @@ export default class NavBarDapp extends Component {
 
     }
   
-    
-
- 
-
 onScroll = () => {
     if(window.scrollY >= 80){
         this.setState({scroll : true})
@@ -39,31 +35,18 @@ wallet(){
 
        return     <div className="account-info"> <div className='account-address'>{address_first_part+"..."+address_second_part} </div> <img className="avatar-icon" src='avatar-icon.svg'></img></div>
     }else{
-     return   <Button onClick={this.onClick} variant="secondary" > {this.props.isConnected ? "Connected" : "Connect Wallet"}</Button>
+     return   <Button className='navbardapp-btn' onClick={this.onClick} variant="secondary" > {this.props.isConnected ? "Connected" : "Connect Wallet"}</Button>
     }
 }
 
   render() {
-    let navbalance = () =>{
-        console.log(this.props.isConnected)
-        if(this.props.walletBalance){
-            
-            return <h1></h1>
-        }else {
-            return <div></div>
-        }
-        
-    }
     
 
     window.addEventListener('scroll',this.onScroll)
     return(
-        <nav    className={this.state.scroll ? 'NavbarItems active' : 'NavbarItems'}>
-           <Link to="/"><h1 className='navbar-logo'>PredictMe <i className='lni lni-react'></i></h1></Link>
-            {navbalance()}
-            
-            
-       {this.wallet()}
+        <nav    className={this.state.scroll ? 'NavbarDappItems active' : 'NavbarDappItems'}>
+           <Link to="/"><div className='navbardapp-logo-container'><img className='navbardapp-logo-img' src="predictme-logo.png" alt='logo'></img><div className='navbardapp-logo-text'>PredictMe </div> </div></Link>
+            {this.wallet()}
         </nav>
     )
   }

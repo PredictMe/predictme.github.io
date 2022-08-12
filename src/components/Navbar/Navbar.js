@@ -2,9 +2,8 @@ import React, { Component, useState } from 'react'
 import {MenuItems} from './MenuItems'
 import { AppButton } from './components/AppButton/AppButton'
 import { Button } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import './Navbar.css'
-
 
 class Navbar extends Component{
 
@@ -24,26 +23,27 @@ class Navbar extends Component{
         
         
     }
+    
 
 
     render(){
         window.addEventListener('scroll',this.onScroll)
         return(
-            <nav    className={this.state.scroll ? 'NavbarItems active' : 'NavbarItems'}>
-                <h1 className='navbar-logo'>PredictMe <i className='lni lni-react'></i></h1>
-                <div    className='menu-icon' onClick={this.handleClick}>
-                    <i  className={this.state.clicked ? 'lni lni-cross-circle' :'lni lni-menu'  }></i>
+            <nav className={this.state.scroll ? 'Navbar active' : 'Navbar'}>
+                <div className='navbar-logo-container'><img className='navbar-logo-img' src="predictme-logo.png" alt='logo'/><div className='navbar-logo-text'>PredictMe </div> </div>
+                <div className='menu-icon' onClick={this.handleClick}>
+                    <i className={this.state.clicked ? 'lni lni-cross-circle' :'lni lni-menu'  }/>
                 </div>
                 
-                <ul className={this.state.clicked ? "nav-menu active" : "nav-menu"}>
-                    {
-                        MenuItems.map((item,index)=>{
-                            return <li key={index}> <Link to={item.url}> <a className={item.cName}> {item.title} </a> </Link></li>
-                        })
-                    }
-                    
-                </ul>
-               <Link to='/Dapp'><AppButton>Launch App</AppButton></Link> 
+                    <ul className={this.state.clicked ? "nav-menu active" : "nav-menu"}>
+                        {
+                           MenuItems.map((item,index)=>{
+                               return <li key={index}> <Link to={item.url} onClick={() => {this.setState({clicked : false})}}> <a  className={item.cName}> {item.title} </a> </Link></li>
+                            })
+                        }
+                    </ul>
+               
+               <Link to='/Dapp'><AppButton className='navbar-appbutton'>Launch App</AppButton></Link> 
             </nav>
         )
     }
