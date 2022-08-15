@@ -8,6 +8,9 @@ import { TokenItems } from './TokenItems';
 import { useState } from 'react';
 import { motion } from 'framer-motion'
 import ConnectToDapp from './components/ConnectToDapp/ConnectToDapp'
+import { Grid } from  'react-loader-spinner'
+import Chart_prediction from './components/Chart/Chart_prediction';
+import uniqid from 'uniqid';
 
 export default class Dapp extends Component{
   iexecSDK
@@ -16,8 +19,9 @@ export default class Dapp extends Component{
   constructor(props){
     super(props)
     this.iexecSDK = new IexecSDK()
+    let tokenItems = TokenItems;
     this.state={
-      navbarkey : 0,
+      navbarkey : "navbarkey",
       connectSetup : false,
       connectSetupKey : 0,
       userAddress : null,
@@ -26,9 +30,12 @@ export default class Dapp extends Component{
       isStorageInitialized : false,
       walletBalance : null,
       selectedTokenId : 0,
-      selectedToken : TokenItems[0],
-      chartKey : 0,
-      
+      tokenItems : tokenItems,
+      selectedToken : tokenItems[0],
+      chartKey : "chartKey",
+      chartPredictionKey : "chartPredictionKey",
+      loading : false,
+      prediction : null
     }
   }
 
@@ -66,17 +73,16 @@ export default class Dapp extends Component{
     console.log(userAddress)
     
     
-    let navbarkey = this.state.navbarkey + 1
-    this.setState({navbarkey : navbarkey})
+    this.setState({navbarkey : uniqid()})
   }
 
   onTokenSelect(id){
     console.log("tokenId",id)
     
         this.setState({selectedTokenId : id})
-        this.setState({selectedToken : TokenItems[id]})
-        let chartKey = this.state.chartKey + 1
-        this.setState({chartKey : chartKey})
+        this.setState({selectedToken : this.state.tokenItems[id]})
+        this.setState({chartKey : uniqid()})
+        this.setState({chartPredictionKey : uniqid()})
       
     
   }
@@ -95,8 +101,9 @@ export default class Dapp extends Component{
 
   async onBuyComputation(){
     console.log("buy computation")
-    
-    let {dappAddress, workerpool, trust, category, params } = this.state.selectedToken
+    this.setState({loading : true})
+    let {dappAddress, workerpool, trust, category, params, id } = this.state.selectedToken
+    let tokenId = id
     let dealId = await this.iexecSDK.buyComputation(dappAddress,category,params,workerpool,trust,this.onComputationProgress.bind(this))
     let taskId = await this.iexecSDK.showDeal(dealId)
 
@@ -112,7 +119,11 @@ export default class Dapp extends Component{
       }
       
     let res = await this.iexecSDK.dowloadResults(taskId)
-    console.log(res)
+    console.log(res.prediction)
+    this.setState({loading : false})
+    this.state.tokenItems[tokenId].prediction = res.prediction
+    this.setState({chartKey : uniqid()})
+    this.setState({chartPredictionKey : uniqid()})
   }
     render() {
 
@@ -122,8 +133,8 @@ export default class Dapp extends Component{
             <NavBarDapp key={this.state.navbarkey} onConnectToDapp={this.connectToDapp.bind(this)}  isConnected={this.state.isConnected} userAddress={this.state.userAddress} walletBalance={this.state.walletBalance}></NavBarDapp>
             <div className='token-selector-container'> <TokenSelector selectedToken={this.state.selectedTokenId} onTokenSelect={this.onTokenSelect.bind(this)}/> </div>
             <div className='dapp-container'>
-              <div className='chart-container'> <Chart key={this.state.chartKey} selectedToken={this.state.selectedToken}/> </div>
-              <div className={this.state.isConnected ? 'button-dapp active' : 'button-dapp'} onClick={this.state.isConnected ? this.onBuyComputation.bind(this) : null}>Buy computation</div>
+              <div className='chart-container'> <Chart_prediction key={this.state.chartPredictionKey}  prediction={this.state.tokenItems[this.state.selectedTokenId].prediction}/><Chart key={this.state.chartKey} prediction={this.state.tokenItems[this.state.selectedTokenId].prediction} selectedToken={this.state.selectedToken}/> </div>
+              {this.state.loading ? <div className="loading-grid"><Grid  color="#0D6EFD" height={40} width={40} /></div> : <div className={this.state.isConnected ? 'button-dapp active' : 'button-dapp'} onClick={this.state.isConnected ? this.onBuyComputation.bind(this) : null}>Buy computation</div>}
             </div>
           </div>
         )

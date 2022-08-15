@@ -255,16 +255,18 @@ class IexecSDK {
 
             const file = await res.blob();
             const {entries} = await unzip(file);
+            let json_text;
             for (const [name, entry] of Object.entries(entries)) {
                 console.log(name, entry.size);
-                if(name == "result.txt"){
+                if(name == "result.json"){
                     console.log("this is computed file")
                     console.log(entry)
                     let text = await entry.json()
+                    json_text = text
                     console.log(text)
                 }
               }
-            return file
+            return json_text
 
         } catch (error) {
             console.log("dowloadResults", error)

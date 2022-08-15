@@ -27,9 +27,30 @@
     backdrop-filter: blur(20px);
 }
 
+
 .navbardapp-btn {
-    display: flex;
+    float: right;
     margin-right: 4vw;
+    padding: 8px 20px;
+    border-radius: 12px;
+    outline: none;
+    border: 3px solid var(--border);
+    cursor: pointer;
+    background: var(--primary);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    white-space: nowrap;
+    
+
+}
+
+.navbardapp-btn:hover {
+    transition: all 0.3s ease-out;
+    background: #fff;
+    color:  var(--primary);
+    border: 3px solid var(--primary);
+    transition: 250ms;
 }
 
 .account-info {

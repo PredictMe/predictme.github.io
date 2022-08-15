@@ -7,7 +7,7 @@
 
 .dapp-layout-1 {
     width: 100vw;
-    height: 100vh;
+    height: 90vh;
     display: flex;
     background: var(--background);
     flex-direction: column;
@@ -45,7 +45,7 @@
     justify-content: center;
     align-items: center;
     background: #1F242D;
-    box-shadow: 0px 0px 30px #0D6EFD;
+    box-shadow: 0px 0px 30px #000000;
 }
 
 .chart-container{
@@ -53,6 +53,11 @@
     width: 384px;
     height: 216px;
     border-radius: 18px;    
+}
+
+.loading-grid {
+    margin-top: 10px;
+    padding: 5px;
 }
 
 .button-dapp {

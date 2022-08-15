@@ -26,7 +26,7 @@ if(this.state.activeId != event.currentTarget.dataset.id ){
       <ul>
         {
             TokenItems.map((item,index)=>{
-            return <li key={index} className={this.state.activeId == item.id ? "token-list active" : "token-list" } onClick={this.OnClick.bind(this)} data-id={item.id}> <span className='token-text-01'>{item.text1}</span><span className='token-text-02'>{item.text2}</span></li>
+            return <li key={index} className={this.state.activeId == item.id ? "token-list active" : "token-list" } onClick={this.OnClick.bind(this)} data-id={item.id}> <span className='token-text-01'>{item.symbol_base}</span><span className='token-text-02'>{item.symbol_quote}</span></li>
                 })
          }
                     

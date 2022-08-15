@@ -1,3 +1,4 @@
+
 :root {
     --background: #191B1F;
     --button-primary: #0D6EFD;
@@ -27,4 +28,24 @@
     font-weight: 700;
     font-size: 1.1rem;
     padding: 0px 2px;
+}
+
+
+.chart-prediction-box {
+    z-index: 3;
+    display: flex;
+    
+    position: absolute;
+    
+}
+
+.chart-prediction-text {
+    margin: 10px 10px;
+    padding: 5px 10px;
+    color: white;
+    font-family: 'inter', 'sans-serif';
+    font-weight: 600;
+    font-size: 1.1rem;
+    border-radius: 10px;
+    background: var(--button-primary);
 }

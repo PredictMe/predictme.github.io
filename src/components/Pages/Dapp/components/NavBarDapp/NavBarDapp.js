@@ -35,7 +35,7 @@ wallet(){
 
        return     <div className="account-info"> <div className='account-address'>{address_first_part+"..."+address_second_part} </div> <img className="avatar-icon" src='avatar-icon.svg'></img></div>
     }else{
-     return   <Button className='navbardapp-btn' onClick={this.onClick} variant="secondary" > {this.props.isConnected ? "Connected" : "Connect Wallet"}</Button>
+     return   <div className='navbardapp-btn' onClick={this.onClick} variant="secondary" > {this.props.isConnected ? "Connected" : "Connect Wallet"}</div>
     }
 }
 
