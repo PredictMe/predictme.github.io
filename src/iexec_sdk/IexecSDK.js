@@ -266,6 +266,7 @@ class IexecSDK {
                     console.log(text)
                 }
               }
+              console.log(json_text)
             return json_text
 
         } catch (error) {

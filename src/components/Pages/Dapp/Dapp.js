@@ -20,37 +20,41 @@ export default class Dapp extends Component{
     super(props)
     this.iexecSDK = new IexecSDK()
     let tokenItems = TokenItems;
-    this.state={
-      navbarkey : "navbarkey",
-      connectSetup : false,
-      connectSetupKey : 0,
-      userAddress : null,
-      isConnected : false,
-      isWalletConnected : false,
-      isStorageInitialized : false,
-      walletBalance : null,
-      selectedTokenId : 0,
-      tokenItems : tokenItems,
-      selectedToken : tokenItems[0],
-      chartKey : "chartKey",
-      chartPredictionKey : "chartPredictionKey",
-      loading : false,
-      prediction : null
-    }
+    
+      this.state={
+        navbarkey : "navbarkey",
+        connectSetup : false,
+        connectSetupKey : 0,
+        userAddress : null,
+        isConnected : false,
+        isWalletConnected : false,
+        isStorageInitialized : false,
+        walletBalance : null,
+        selectedTokenId : 0,
+        tokenItems : tokenItems,
+        selectedToken : tokenItems[0],
+        chartKey : "chartKey",
+        chartPredictionKey : "chartPredictionKey",
+        loading : false,
+        prediction : null
+      }
+      
+    
   }
+
 
    connectToDapp = async () =>{
     console.log("connect to wallet")
     this.setState({connectSetup : true})
     //await this.onConnected()
     await this.onConectToWallet()
+    await this.onConnectToStorage()
   }
 
   async onConectToWallet(){
     await this.iexecSDK.init()
     this.setState({isWalletConnected : true})
-    let connectSetupKey = this.state.connectSetupKey + 1
-    this.setState({connectSetupKey : connectSetupKey})
+    this.setState({connectSetupKey : uniqid()})
   }
 
   async onConnectToStorage(){
@@ -59,8 +63,7 @@ export default class Dapp extends Component{
     if(isStorageInitialized != this.state.isStorageInitialized){this.setState({isStorageInitialized: isStorageInitialized})}
    
     this.setState({connectSetup : false})
-    let connectSetupKey = this.state.connectSetupKey + 1
-    this.setState({connectSetupKey : connectSetupKey})
+    this.setState({connectSetupKey : uniqid()})
     await this.onConnected()
   }
 
@@ -134,7 +137,7 @@ export default class Dapp extends Component{
             <div className='token-selector-container'> <TokenSelector selectedToken={this.state.selectedTokenId} onTokenSelect={this.onTokenSelect.bind(this)}/> </div>
             <div className='dapp-container'>
               <div className='chart-container'> <Chart_prediction key={this.state.chartPredictionKey}  prediction={this.state.tokenItems[this.state.selectedTokenId].prediction}/><Chart key={this.state.chartKey} prediction={this.state.tokenItems[this.state.selectedTokenId].prediction} selectedToken={this.state.selectedToken}/> </div>
-              {this.state.loading ? <div className="loading-grid"><Grid  color="#0D6EFD" height={40} width={40} /></div> : <div className={this.state.isConnected ? 'button-dapp active' : 'button-dapp'} onClick={this.state.isConnected ? this.onBuyComputation.bind(this) : null}>Buy computation</div>}
+              {this.state.loading ? <div className="loading-animation"><Grid  color="#0D6EFD" height={40} width={40} /></div> : <div className={this.state.isConnected ? 'button-dapp active' : 'button-dapp'} onClick={this.state.isConnected ? this.onBuyComputation.bind(this) : null}>Buy computation</div>}
             </div>
           </div>
         )

@@ -135,8 +135,8 @@
     box-sizing: border-box;
     z-index: 2;
     margin-right: 5vw;
-    width: 300px;
-    height: 155px;
+    width: 390px;
+    height: 201px;
 
     background: var(--background);
     mix-blend-mode: normal;
@@ -145,21 +145,21 @@
 }
 
 .ov-32-description-title {
-    padding: 15px 10px 10px 10px;
+    padding: 25px 20px 20px 20px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 19px;
     color: #FFFFFF;
 }
 
 .ov-32-description-text {
-    padding: 0px 10px 10px 10px;
+    padding: 0px 20px 20px 20px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 19px;
     color: #A5A5A5;
 }
@@ -226,8 +226,8 @@
     box-sizing: border-box;
     z-index: 2;
     margin-left: 10vw;
-    width: 300px;
-    height: 155px;
+    width: 390px;
+    height: 201px;
 
     background: var(--background);
     mix-blend-mode: normal;
@@ -236,22 +236,22 @@
 }
 
 .ov-53-description-title {
-    padding: 20px 10px 10px 10px;
+    padding: 25px 20px 20px 20px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
+    font-size: 20px;
     line-height: 19px;
     color: #FFFFFF;
 }
 
 .ov-53-description-text {
-    padding: 0px 10px 10px 10px;
+    padding: 0px 20px 20px 20px;
     font-family: 'Inter';
     font-style: normal;
     font-weight: 400;
-    font-size: 16px;
-    line-height: 19px;
+    font-size: 20px;
+    line-height: 25px;
     color: #A5A5A5;
 }
 

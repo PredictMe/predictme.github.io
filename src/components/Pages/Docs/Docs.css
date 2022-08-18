@@ -30,7 +30,14 @@
 }
 
 .docs-layout-11-box {
-    width: 80vw;
+    padding: 10px;
+    width: 60vw;
+    background: #757575;
+    border: 1px solid #757575;
+    border-radius: 3px;
+    color: white;
+    font-family: 'inter', 'sans-serif';
+    font-weight: 500;
 }
 
 .docs-layout-2 {
@@ -51,7 +58,7 @@
 }
 
 .docs-layout-21-box {
-    width: 80vw;
+    width: 60vw;
 }
 
 .docs-layout-3 {
@@ -72,5 +79,5 @@
 }
 
 .docs-layout-31-box {
-    width: 80vw;
+    width: 60vw;
 }
