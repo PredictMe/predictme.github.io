@@ -65,7 +65,7 @@ export default class Chart extends Component{
       isDemo = false
     }
     this.state = {
-      color1 : props.selectedToken.color1,
+      color : props.selectedToken.color,
       isDemo : isDemo,
       data : [],
       isChartReady : false,
@@ -99,7 +99,7 @@ export default class Chart extends Component{
   }
 
    btcData = async (symbol_base, symbol_quote) => {
-    const response = await fetch('https://min-api.cryptocompare.com/data/v2/histominute?fsym='+symbol_base+'&tsym='+symbol_quote+'&limit=119&api_key=0646cc7b8a4d4b54926c74e0b20253b57fd4ee406df79b3d57d5439874960146');
+    const response = await fetch('https://min-api.cryptocompare.com/data/v2/histominute?fsym='+symbol_base+'&tsym='+symbol_quote+'&limit=119&api_key=3166af9e802fd37368c2381a2ee7cec82d1ad78d0b20fd492f38ffe99787cdd8');
     const json = await response.json();
     const data = json.Data.Data
     let marketData =[]
@@ -137,12 +137,12 @@ export default class Chart extends Component{
           >
               <defs>
                 <linearGradient id="paint0_linear" x1="0" y1="0" x2="1" y2="0">
-                  <stop stopColor={this.state.color1} />
-                  <stop offset="1" stopColor={this.state.color1} />
+                  <stop stopColor={this.state.color} />
+                  <stop offset="1" stopColor={this.state.color} />
                 </linearGradient>
                 <linearGradient id="paint1_linear" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor={this.state.color1} stopOpacity={0.8} />
-                <stop offset="95%" stopColor={this.state.color1} stopOpacity={0.0} />
+                <stop offset="5%" stopColor={this.state.color} stopOpacity={0.8} />
+                <stop offset="95%" stopColor={this.state.color} stopOpacity={0.0} />
               </linearGradient>
               </defs>
               

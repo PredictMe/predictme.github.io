@@ -194,8 +194,9 @@
     position: relative;
     justify-content: center;
     align-items: center;
-    height: 40vh;
+    height: 45vh;
     overflow: hidden;
+    padding-bottom: 5vh;
 }
 
 

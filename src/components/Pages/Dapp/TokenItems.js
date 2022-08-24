@@ -6,15 +6,12 @@ const TokenItems = [
         symbol_quote : "USDT",
         cName : 'token-item',
         prediction : null,
-        dappAddress : "0xBa39B40d28c52b2c2750a2Bc4b5c57FD8202E08C",
+        dappAddress : "0x13B645eA50F75c8f270beb5ac222a6eF7118ED8e",
         workerpool : "0xEb14Dc854A8873e419183c81a657d025EC70276b",
         trust : 0,
         category : 0,
-        params : "",
-        color1 : "#0317fc",
-        color2 : "#6B8DE3",
-        color3 : "#6B8DE3",
-        color4 : "#6B8DE3"
+        params : "XMRUSDT",
+        color : "#0317fc"
     },
     {
         id : 1,
@@ -23,15 +20,12 @@ const TokenItems = [
         symbol_quote : "USDT",
         cName : 'token-item',
         prediction : null,
-        dappAddress : "0x0f1a28c58398E64d77c85988aB8Aa29794727559",
+        dappAddress : "0x13B645eA50F75c8f270beb5ac222a6eF7118ED8e",
         workerpool : "0xEb14Dc854A8873e419183c81a657d025EC70276b",
         trust : 0,
         category : 0,
-        params : "",
-        color1 : "#03fc13",
-        color2 : "#6BCDE2",
-        color3 : "#6BCDE2",
-        color4 : "#6BCDE2"
+        params : "RLCUSDT",
+        color : "#03fc13"
     },
     {
         id : 2,
@@ -40,15 +34,12 @@ const TokenItems = [
         symbol_quote : "USDT",
         cName : 'token-item',
         prediction : null,
-        dappAddress : "0x0f1a28c58398E64d77c85988aB8Aa29794727559",
+        dappAddress : "0x13B645eA50F75c8f270beb5ac222a6eF7118ED8e",
         workerpool : "0xEb14Dc854A8873e419183c81a657d025EC70276b",
         trust : 0,
         category : 0,
-        params : "",
-        color1 : "#fcba03",
-        color2 : "#6BHQE2",
-        color3 : "#6BHQE2",
-        color4 : "#6BHQE2"
+        params : "BTCUSDT",
+        color : "#fcba03"
     }
 ]
 

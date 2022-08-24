@@ -27,11 +27,11 @@
     margin-left: 10px;
     margin-bottom: 10px;
 }
-.button-connect-wallet {
+.connect-wallet {
     display: none;
 }
 
-.button-connect-wallet.active{
+.connect-wallet.active{
     display: block;
     padding: 8px 20px;
     border-radius: 12px;
@@ -45,11 +45,11 @@
     white-space: nowrap;
 }
 
-.button-connect-storage {
+.connect-storage {
     display: none;
 }
 
-.button-connect-storage.active {
+.connect-storage.active {
     display: block;
     padding: 8px 32px;
     border-radius: 12px;

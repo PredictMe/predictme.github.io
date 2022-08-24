@@ -9,6 +9,7 @@
     background: var(--background);
     width: 100vw;
     height: 90vh;
+    padding: 4vh 5vw;
     
 }
 
@@ -17,7 +18,7 @@
     display: flex;
     flex-direction: row;
     overflow: hidden;
-    justify-content: center;
+    justify-content: left;
     align-items: top;
 }
 
@@ -45,7 +46,7 @@
     display: flex;
     flex-direction: row;
     overflow: hidden;
-    justify-content: center;
+    justify-content: left;
     align-items: top;
 }
 
@@ -66,7 +67,7 @@
     display: flex;
     flex-direction: row;
     overflow: hidden;
-    justify-content: center;
+    justify-content: left;
     align-items: top;
 }
 
