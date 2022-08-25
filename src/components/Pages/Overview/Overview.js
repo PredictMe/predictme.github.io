@@ -47,9 +47,9 @@ function Overview() {
 
 const Text = {
   title01 : "How it works",
-  descrition01 : "The dapp is executed by a network of workers. For every prediction it fetches new data from binance and runs a machine learning algorithm to predict the market trend.",
+  descrition01 : "When you buy a prediction, the dapp is executed by a network of workers. It fetches new data from binance and runs a machine learning algorithm to predict the market trend.",
   title02 : "The AI model is secret at all times.",
-  descrition02 : "The model is stored encrypted. It is only decrypted inside a sgx enclave. Not even the hardware owner can inspect it.",
+  descrition02 : "The model is stored encrypted. It is only decrypted inside the worker in a sgx enclave. The sgx enclave makes it imposible for the hardware owner to inspect the code.",
 
 }
 

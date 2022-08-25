@@ -13,8 +13,19 @@
     
 }
 
-.docs-layout-1 {
-    margin-top: 80px;
+.docs-layout-01{
+    margin-top: 15vh;
+}
+
+h1 {
+    color: white;
+}
+
+a {
+    color: #1441f5;
+}
+.docs-box-01 {
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     overflow: hidden;
@@ -22,15 +33,16 @@
     align-items: top;
 }
 
-.docs-layout-11-number {
-    margin-right: 3vw;
+.docs-01-number {
+    margin-right: 1vw;
     font-size: 2.5rem;
     font-family: 'inter', 'sans-serif';
     font-weight: 600;
+    width: 3rem;
     color: white;
 }
 
-.docs-layout-11-box {
+.docs-01-text {
     padding: 10px;
     width: 60vw;
     background: #757575;
@@ -38,47 +50,18 @@
     border-radius: 3px;
     color: white;
     font-family: 'inter', 'sans-serif';
-    font-weight: 500;
-}
-
-.docs-layout-2 {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: row;
-    overflow: hidden;
-    justify-content: left;
-    align-items: top;
-}
-
-.docs-layout-21-number {
-    margin-right: 3vw;
-    font-size: 2.5rem;
-    font-family: 'inter', 'sans-serif';
     font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.docs-layout-02{
+    margin-top: 40vh;
+}
+
+.docs-02-github-link-text {
     color: white;
 }
 
-.docs-layout-21-box {
-    width: 60vw;
-}
-
-.docs-layout-3 {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: row;
-    overflow: hidden;
-    justify-content: left;
-    align-items: top;
-}
-
-.docs-layout-31-number {
-    margin-right: 3vw;
-    font-size: 2.5rem;
-    font-family: 'inter', 'sans-serif';
-    font-weight: 600;
-    color: white;
-}
-
-.docs-layout-31-box {
-    width: 60vw;
+.docs-02-github-logo{
+    height: 20px;
 }
