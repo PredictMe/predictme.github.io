@@ -16,7 +16,7 @@ class IexecSDK {
         try {
             let ethProvider;
 
-            //window.ethereum.on('chainChanged', () => { document.location.reload() })
+            window.ethereum.on('chainChanged', () => { document.location.reload() })
 
             if (window.ethereum) {
                 console.log("using default provider");

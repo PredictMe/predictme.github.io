@@ -30,7 +30,7 @@ class Navbar extends Component{
         window.addEventListener('scroll',this.onScroll)
         return(
             <nav className={this.state.scroll ? 'Navbar active' : 'Navbar'}>
-                <div className='navbar-logo-container'><img className='navbar-logo-img' src="predictme-logo.png" alt='logo'/><div className='navbar-logo-text'>PredictMe </div> </div>
+                <Link to="/"><div className='navbar-logo-container'><img className='navbar-logo-img' src="predictme-logo.png" alt='logo'/><div className='navbar-logo-text'>PredictMe </div> </div></Link>
                 <div className='menu-icon' onClick={this.handleClick}>
                     <i className={this.state.clicked ? 'lni lni-cross-circle' :'lni lni-menu'  }/>
                 </div>
