@@ -7,7 +7,7 @@ export default class Docs extends Component {
     return (
       <div className='docs-container'>
         <div className='docs-layout-01'>
-          <h1>Monetize AI using Iexec</h1>
+          <h1>How to monetize AI using Iexec</h1>
           <div className='docs-box-01'>
               <div className='docs-01-number'>1</div>
               <div className='docs-01-text'><div>Train a machine learning model</div></div>
