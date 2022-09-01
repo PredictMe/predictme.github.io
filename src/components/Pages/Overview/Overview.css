@@ -355,7 +355,17 @@
 
 
 
+@media screen and (max-width: 960px){
 
+    .ov-2-all-decentralized{
+        font-size: 1.5rem;
+    }
+
+    .ov-4-monetize-ai{
+        font-size: 1.5rem;
+    }
+
+}
 
 
 
