@@ -5,6 +5,9 @@ import {TokenItems} from './../Dapp/TokenItems'
 import Chart_info from '../Dapp/components/Chart/Chart_info'
 
 function Overview() {
+
+  
+
   return (
     <div className='overview-container'>
        
@@ -20,7 +23,7 @@ function Overview() {
       </div>
 
       <div  className='ov-grid-2'>
-        <h1 className='ov-2-all-decentralized' > <pre>From start to finish it’s all</pre> decentralized</h1>
+      {window.innerWidth<960 ? <h1 className='ov-2-all-decentralized' > <pre>From start to finish it’s </pre> all decentralized</h1> : <h1 className='ov-2-all-decentralized' > <pre>From start to finish it’s all</pre> decentralized</h1> }
       </div>
 
       <div className='ov-grid-3'>
@@ -31,7 +34,7 @@ function Overview() {
       </div>
 
       <div  className='ov-grid-4'>
-        <h1 className='ov-4-monetize-ai' ><pre>Monetize AI models whithout losing </pre>ownership</h1>
+      {window.innerWidth<960 ? <h1 className='ov-4-monetize-ai' ><pre>Monetize AI models</pre>  whithout losing ownership</h1> : <h1 className='ov-4-monetize-ai' ><pre>Monetize AI models whithout losing </pre>ownership</h1> }
       </div>
 
       <div className='ov-grid-5'>
