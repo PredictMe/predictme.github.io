@@ -28,7 +28,6 @@ function Overview() {
 
       <div className='ov-grid-3'>
         <img className='ov-31-image' src='ellipse-11.svg' alt="background"></img>
-        {/*<img className='ov-32-description' src='/description-01.svg' alt='descrition-01'/>*/}
         <div className='ov-32-description-container'><div className='ov-32-description-title'>{Text.title01}</div><div className='ov-32-description-text'>{Text.descrition01}</div></div>
         <img className='ov-33-infographic' src="/infographic-01.svg" alt="infographic-01" />
       </div>
@@ -40,7 +39,6 @@ function Overview() {
       <div className='ov-grid-5'>
         <img className='ov-51-image' src='ellipse-11.svg' alt="background"/>
         <img className='ov-52-infographic' src="/infographic-04.svg" alt="infographic-02"/>
-        {/*<img className='ov-52-description' src='/description-02.svg' alt='descrition-02'/*/}
         <div className='ov-53-description-container'><div className='ov-53-description-title'>{Text.title02}</div><div className='ov-53-description-text'>{Text.descrition02}</div></div>
       </div>
         
