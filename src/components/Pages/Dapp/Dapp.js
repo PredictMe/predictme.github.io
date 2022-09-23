@@ -11,6 +11,9 @@ import ConnectToDapp from './components/ConnectToDapp/ConnectToDapp'
 import { Grid } from  'react-loader-spinner'
 import Chart_prediction from './components/Chart/Chart_prediction';
 import uniqid from 'uniqid';
+//import fetch from 'fetch'
+
+let SERVER_URL = 'http://localhost:3003/'
 
 export default class Dapp extends Component{
   iexecSDK
@@ -102,7 +105,47 @@ export default class Dapp extends Component{
     return new Promise(resolve => setTimeout(resolve, time));
   }
 
+  async sendPublicKey(){
+    let res = await fetch( SERVER_URL + 'publickey', {
+      method : 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({
+         publicKey : 'test',
+        
+        })
+    }
+    )
+
+    
+  }
+
+  async sendToAITracker(dappAddress,oracleAdress,dealId){
+    
+    let res = await fetch( SERVER_URL, {
+      method : 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({
+         dappAddress : dappAddress,
+         oracleAddress : oracleAdress,
+         dealId : dealId,
+         timestamp : Date.now()
+        
+        })
+    }
+    )
+
+    
+  }
+
   async onBuyComputation(){
+   
+    
     console.log("buy computation")
     this.setState({loading : true})
     let {dappAddress, workerpool, trust, category, params, id } = this.state.selectedToken
@@ -122,22 +165,40 @@ export default class Dapp extends Component{
       }
       
     let res = await this.iexecSDK.dowloadResults(taskId)
+    
     console.log(res.prediction)
     this.setState({loading : false})
     this.state.tokenItems[tokenId].prediction = res.prediction
     this.setState({chartKey : uniqid()})
     this.setState({chartPredictionKey : uniqid()})
+      
+    await this.sendToAITracker(dappAddress,"oracleAddress",dealId)
   }
     render() {
 
         return (
-          <div className='dapp-layout-1'>
+          <div className='dapp-container-1'>
             <div className={this.state.connectSetup ? 'connectSetup active' : 'connectSetup'}><ConnectToDapp key={this.state.connectSetupKey} isStorageConnected={this.state.isStorageInitialized}isWalletConnected={this.state.isWalletConnected} onConnectToWallet={this.onConectToWallet.bind(this)}onConnectToStorage={this.onConnectToStorage.bind(this)}/></div>
-            <NavBarDapp key={this.state.navbarkey} onConnectToDapp={this.connectToDapp.bind(this)}  isConnected={this.state.isConnected} userAddress={this.state.userAddress} walletBalance={this.state.walletBalance}></NavBarDapp>
-            <div className='token-selector-container'> <TokenSelector selectedToken={this.state.selectedTokenId} onTokenSelect={this.onTokenSelect.bind(this)}/> </div>
-            <div className='dapp-container'>
-              <div className='chart-container'> <Chart_prediction key={this.state.chartPredictionKey}  prediction={this.state.tokenItems[this.state.selectedTokenId].prediction}/><Chart key={this.state.chartKey} prediction={this.state.tokenItems[this.state.selectedTokenId].prediction} selectedToken={this.state.selectedToken}/> </div>
-              {this.state.loading ? <div className="loading-animation"><Grid  color="#0D6EFD" height={40} width={40} /></div> : <div className={this.state.isConnected ? 'button-dapp active' : 'button-dapp'} onClick={this.state.isConnected ? this.onBuyComputation.bind(this) : null}>Buy computation</div>}
+              <NavBarDapp key={this.state.navbarkey} onConnectToDapp={this.connectToDapp.bind(this)}  isConnected={this.state.isConnected} userAddress={this.state.userAddress} walletBalance={this.state.walletBalance}></NavBarDapp>
+              <div className='token-selector-container'> <TokenSelector selectedToken={this.state.selectedTokenId} onTokenSelect={this.onTokenSelect.bind(this)}/> </div>
+              <div className='dapp-layout'>
+                <div className='dapp-left'>
+                  <div className='dapp-box'>
+                    <div className='chart-box'> <Chart_prediction key={this.state.chartPredictionKey}  prediction={this.state.tokenItems[this.state.selectedTokenId].prediction}/><Chart key={this.state.chartKey} prediction={this.state.tokenItems[this.state.selectedTokenId].prediction} selectedToken={this.state.selectedToken}/> </div>
+                    {this.state.loading ? <div className="loading-animation"><Grid  color="#0D6EFD" height={40} width={40} /></div> : <div className={this.state.isConnected ? 'button-dapp active' : 'button-dapp'} onClick={this.state.isConnected ? this.onBuyComputation.bind(this) : null}>Buy computation</div>}
+                  </div>
+                </div>
+              <div className='dapp-right'>
+                <div className='aitracker-box'>
+                  <div className='aitracker-title-layout'><img className='aitracker-logo' src='./logo-aitracker.png' alt='ai tracker logo'/> <h3 className='aitracker-title'>AI Tracker Stats</h3></div>
+                  <div className='aitracker-list'>Total runs: </div>
+                  <div className='aitracker-list'>AItracker points: </div>
+                  <div className='aitracker-list'>Correct/Incorrect: </div>
+                  <div className='aitracker-list'>Correct percentige: </div>
+                  <button onClick={this.sendPublicKey}>Test server</button>
+                </div>
+              </div>
+              
             </div>
           </div>
         )
