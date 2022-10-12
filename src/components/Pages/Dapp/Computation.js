@@ -1,5 +1,5 @@
 const forge = require("node-forge");
-let SERVER_URL = "http://46.101.250.145:3003/";
+let SERVER_URL = "https://predictme.io:3003/";
 class Computation {
   static async sendPublicKey(publicKey) {
     let res = await fetch(SERVER_URL + "publickey", {
