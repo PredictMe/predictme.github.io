@@ -9,4 +9,4 @@ model that tries to guess if the market will go down or up. Users that trade
 can pay to get a prediction. Even tho the dapp is a demo, it shows a clear use case
 for Iexec.
 
-App url: [https://predictme.github.io/](https://predictme.github.io/)
+App link: [https://predictme.github.io/](https://predictme.github.io/)
