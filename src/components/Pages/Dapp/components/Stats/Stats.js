@@ -25,7 +25,7 @@ function Stats(props) {
               <div className="aitracker-list">Correct/Incorrect: {data.correct_predictions} / {data.incorrect_prediction}</div>
               <div className="aitracker-list">Correct percentige: {data.percentige}%</div>
               
-              <div className='aitracker-learnmore'><a href='https://aidecentralizedtracker.github.io/' target="_blank">Learn more</a></div>
+              <div className='aitracker-learnmore'><a href='https://decentralizedaitracker.github.io/' target="_blank">Learn more</a></div>
     </div>
   )
 }
