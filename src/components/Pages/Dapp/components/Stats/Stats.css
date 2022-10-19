@@ -1,3 +1,11 @@
+:root {
+    --background: #191B1F;
+    --button-primary: #0D6EFD;
+    --accent-color: #1441f5;
+    --button-border: #15376C;
+}
+
+
 .aitracker-box{
     margin-left: 20px;
     border-radius: 33px;
@@ -38,5 +46,9 @@
     margin-bottom: 30px;
     margin-right: 30px;
     cursor: pointer;
-    color: #0d6dfdbd;
+    color: var(--accent-color)
 }
+
+a{
+    color: var(--accent-color)
+}   
