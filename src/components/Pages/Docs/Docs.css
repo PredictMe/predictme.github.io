@@ -13,18 +13,21 @@
     
 }
 
-.docs-layout-01{
+.docs-layout{
     margin-top: 20vh;
 }
 
-h1 {
+.docs-title {
     color: white;
+    font-size: 2.5rem;
+    font-family: 'inter', 'sans-serif';
+    font-weight: 600;
 }
 
-a {
+.docs-link {
     color: #1441f5;
 }
-.docs-box-01 {
+.docs-box {
     margin-top: 20px;
     display: flex;
     flex-direction: row;
@@ -33,7 +36,7 @@ a {
     align-items: top;
 }
 
-.docs-01-number {
+.docs-number {
     margin-right: 1vw;
     font-size: 2.5rem;
     font-family: 'inter', 'sans-serif';
@@ -42,7 +45,7 @@ a {
     color: white;
 }
 
-.docs-01-text {
+.docs-text {
     padding: 10px;
     width: 60vw;
     background: #757575;
@@ -54,14 +57,3 @@ a {
     font-size: 1.2rem;
 }
 
-.docs-layout-02{
-    margin-top: 40vh;
-}
-
-.docs-02-github-link-text {
-    color: white;
-}
-
-.docs-02-github-logo{
-    height: 20px;
-}
