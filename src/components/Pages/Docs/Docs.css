@@ -1,6 +1,7 @@
 :root {
     --background: #191B1F;
     --button-primary: #0D6EFD;
+    --accent-color: #1441f5;
     --button-border: #15376C;
 }
 
@@ -25,7 +26,7 @@
 }
 
 .docs-link {
-    color: #1441f5;
+    color: var(--accent-color);
 }
 .docs-box {
     margin-top: 20px;
