@@ -175,17 +175,17 @@ class IexecSDK {
 
     async buyComputation(appAddress, category, params, workerpool, trustLevel, onComputationProgress) {
         try {
-
+            
 
             const appOrders = await this.iexec.orderbook.fetchAppOrderbook(appAddress);
-            //console.log("appOrders",appOrders)
+            console.log("appOrders",appOrders)
             const appOrder = appOrders.orders[0]
             //console.log("appOrder",appOrder)
             if (!appOrder) throw Error(`no apporder found for app ${appAddress}`);
             const workerpoolOrders = await this.iexec.orderbook.fetchWorkerpoolOrderbook(
                 { category },
             );
-            //console.log("workerpoolOrders",workerpoolOrders)
+            console.log("workerpoolOrders",workerpoolOrders)
             const workerpoolOrder = workerpoolOrders.orders[0];
             console.log("workerpoolOrder", workerpoolOrder)
             if (!workerpoolOrder)
@@ -200,12 +200,14 @@ class IexecSDK {
                 requester: userAddress,
                 //workerpool: workerpoolOrder.order.workerpool,
                 volume: 1,
-                params,
+                params : params,
                 category,
             });
+
+            
             onComputationProgress(1)
             const requestOrder = await this.iexec.order.signRequestorder(requestOrderToSign);
-            //console.log("requestOrder",requestOrder)
+            console.log("requestOrder",requestOrder)
             const res = await this.iexec.order.matchOrders({
                 apporder: appOrder.order,
                 requestorder: requestOrder,

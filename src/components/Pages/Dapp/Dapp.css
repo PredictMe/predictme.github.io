@@ -5,7 +5,7 @@
     --inactive-border: #474747;
 }
 
-.dapp-layout-1 {
+.dapp-container-1 {
     width: 100vw;
     height: 90vh;
     display: flex;
@@ -35,11 +35,18 @@
     margin-bottom: 5vh;
 }
 
+.dapp-layout{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-.dapp-container {
+.dapp-box {
     background: var(--background);
     display: flex;
     padding: 20px 20px 20px 20px;
+    width: 425px;
+    height: 330px;
     border-radius: 33px;
     flex-direction: column;
     justify-content: center;
@@ -48,10 +55,11 @@
     box-shadow: 0px 0px 30px #000000;
 }
 
-.chart-container{
+
+.chart-box{
     background: var(--background);
-    width: 384px;
-    height: 216px;
+    width: 380px;
+    height: 297px;
     border-radius: 18px;    
 }
 
